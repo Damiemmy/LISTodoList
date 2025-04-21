@@ -6,6 +6,7 @@ import { useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import {format} from 'date-fns';
 import Postpage from '@/components/Postpage'
+import api from '@/api/Apirequest'
 
 const Pagess = () => {
   const{posts,setPosts,search,setSearch,searchResults,setSearchResults}= useContext(PostContext)
@@ -18,16 +19,21 @@ const Pagess = () => {
   
 
   
-  const Handlesubmit=(e)=>{
+  const Handlesubmit=async(e)=>{
     e.preventDefault()
     const id=(posts.length ? posts[posts.length-1].id + 1:1)
     const date=format(new Date(),'MMM dd,yyyy pp');
     const NewPost={id,title:posttitle,description:postbody,date}
-    const Postlist=[...posts,NewPost]
-    setPosts(Postlist)
-    setPostsbody('')
-    setPosttitle('')
-    (router.push('/Postpage'))
+    try{
+      const response=await api.post('/posts',NewPost)
+      const Postlist=[...posts,response.data];
+      setPosts(Postlist)
+      setPostsbody('')
+      setPosttitle('')
+      (router.push('/Postpage'))
+    }catch(err){
+      console(err.message)
+    }
   
     
   }

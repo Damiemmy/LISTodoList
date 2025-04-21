@@ -3,6 +3,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footers from "@/components/Footers";
 import { PostProvider } from "@/components/Postcontext";
+import RightBar from "@/components/RightBar";
+import Leftbar from "@/components/Leftbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +28,19 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >  <PostProvider>
         <Header/>
+        <div className="hidden md:flex md:h-[calc(100vh-22px)] md:w-full">
+          <div className="flex-[2] w-full h-full text-center justify-center items-center border border-r-red-400">
+            <RightBar />
+          </div>
+          <div className="flex-[6] text-center border border-r-red-400">
+            {children} {/* This replaces Outlet */}
+          </div>
+         
+        </div>
+        <div className="md:hidden">
         {children}
+        </div>
+       
         <Footers/>
         </PostProvider>
       </body>

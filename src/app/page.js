@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
 import BlogBanner from '@/components/BlogBanner'
+import Productpage from '@/components/Productpage'
 
 
 const page = () => {
@@ -16,6 +17,7 @@ const page = () => {
     
     </div>
     <BlogBanner/>
+    <Productpage/>
    
     </div>
   )

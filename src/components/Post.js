@@ -5,7 +5,7 @@ import Postlist from './Postlist'
 const Post = ({posts,setPosts}) => {
 
   return (
-    <div>
+    <div className='w-full h-full'>
         {posts.map((post)=>(
             <Postlist key={post.id} post={post} posts={posts} setPosts={setPosts}/>
         ))}
